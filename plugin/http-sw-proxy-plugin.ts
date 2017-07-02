@@ -97,19 +97,19 @@ export class HttpSwProxyPluginImpl {
         });
 
         self.addEventListener('message', event => {
-            if(typeof event.data != 'string' || event.data.indexOf("give me response ") == -1)
-                return;
-            let key:string = event.data.substr(17);
-            let interval: any;
-            interval = setInterval(() => {
-                if (this.promiseRegister.has(parseInt(key))) {
-                    clearInterval(interval);
-                    this.promiseRegister.get(parseInt(key)).then(value => {
-                        event.ports[0].postMessage("response is waiting: " + key);
-                        this.promiseRegister.delete(parseInt(key));
-                    });
-                }
-            }, 1);
+            if(typeof event.data == 'string' && event.data.indexOf("give me response ") > -1) {
+                let key:string = event.data.substr(17);
+                let interval:any;
+                interval = setInterval(() => {
+                    if (this.promiseRegister.has(parseInt(key))) {
+                        clearInterval(interval);
+                        this.promiseRegister.get(parseInt(key)).then(value => {
+                            event.ports[0].postMessage("response is waiting: " + key);
+                            this.promiseRegister.delete(parseInt(key));
+                        });
+                    }
+                }, 1);
+            }
         })
     }
 }
