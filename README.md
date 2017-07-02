@@ -5,7 +5,7 @@ This service proxies Angular http traffic via service worker. It is collecting s
 
 ### Workflow
 
-Will be provided soon.
+![ng-http-sw-proxy flowchart](https://raw.githubusercontent.com/maciejtreder/ng-http-sw-proxy/master/ng-http-sw-proxy-flow.png)
 
 ### Installation
 
