@@ -1,0 +1,15 @@
+node_modules
+npm-debug.log
+Thumbs.db
+.DS_Store
+src
+!dist/src
+plugin
+!dist/plugin
+*.ngsummary.json
+*.iml
+rollup.config.js
+tsconfig.json
+*.ts
+!*.d.ts
+.idea
