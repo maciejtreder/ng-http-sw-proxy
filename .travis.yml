@@ -2,11 +2,6 @@ language: node_js
 node_js:
 - node
 
-before_deploy:
-  - npm install
-  - ls -la node_modules
-  - npm install typescript -g
-
 deploy:
   provider: npm
   email: contact@maciejtreder.com

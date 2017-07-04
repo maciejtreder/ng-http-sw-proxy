@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declaration": true,
+    "stripInternal": true,
+    "experimentalDecorators": true,
+    "strictNullChecks": false,
+    "noImplicitAny": true,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "paths": {
+      "@angular/core": ["node_modules/@angular/core"],
+      "@angular/http": ["node_modules/@angular/http"],
+      "@angular/common": ["node_modules/@angular/common"],
+      "@angular/platform-browser": ["node_modules/@angular/platform-browser"],
+      "@angular/service-worker": ["node_modules/@angular/service-worker"],
+      "idb": ["node_modules/idb/*"],
+      "rxjs/*": ["node_modules/rxjs/*"]
+    },
+    "rootDir": ".",
+    "outDir": "dist",
+    "sourceMap": true,
+    "inlineSources": true,
+    "target": "es5",
+    "skipLibCheck": true,
+    "lib": [
+      "es2015",
+      "dom"
+    ]
+  },
+  "files": [
+    "index.ts"
+  ],
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true
+  }
+}

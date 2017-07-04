@@ -3,10 +3,12 @@ npm-debug.log
 Thumbs.db
 .DS_Store
 *.js
+!rollup.config.js
 *.map
 *.d.ts
 dist
 *.json
 !package.json
+!tsconfig.json
 .idea
 *.iml
