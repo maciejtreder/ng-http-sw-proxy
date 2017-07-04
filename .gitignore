@@ -4,6 +4,7 @@ Thumbs.db
 .DS_Store
 *.js
 !rollup.config.js
+!service-worker/*.js
 *.map
 *.d.ts
 dist
