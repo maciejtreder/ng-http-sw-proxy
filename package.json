@@ -1,6 +1,6 @@
 {
   "name": "ng-http-sw-proxy",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "Proxy for angular http service. Schedules request send in service-worker and/or IndexedDB.",
   "main": "dist/bundles/ng-http-sw-proxy.umd.js",
   "module": "dist/index.js",
