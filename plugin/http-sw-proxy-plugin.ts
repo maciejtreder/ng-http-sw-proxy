@@ -1,7 +1,5 @@
 import * as idb from 'idb';
 import { Store } from '../src/store';
-import { RestRequest, IdRestRequest } from '../src/rest-request';
-import { RestResponse } from '../src/rest-response';
 import { ReplaySubject } from 'rxjs';
 
 
@@ -16,6 +14,18 @@ export class HttpSwProxyPluginImpl {
 
     private store: Store = new Store();
 
+    private getMethod(id: number): string {
+        switch (id) {
+            case 0: return 'GET';
+            case 1: return 'POST';
+            case 2: return 'PUT';
+            case 3: return 'DELETE';
+            case 4: return 'OPTIONS';
+            case 5: return 'HEAD';
+            case 6: return 'PATCH';
+        }
+    }
+
     private getContentType(body:any):string {
         if (body instanceof URLSearchParams)
             return 'application/x-www-form-urlencoded';
@@ -29,25 +39,32 @@ export class HttpSwProxyPluginImpl {
             return 'text/plain';
     }
 
-    private getHeaders(body:any): Headers {
+    private getBody(body:any):any {
+        if (body && typeof body === 'object')
+            return JSON.stringify(body)
+        return body;
+    }
+
+    private getHeaders(request:any): Headers {
         let headers = new Headers();
-        if (body != null)
-            headers.set('Content-Type', this.getContentType(body));
+        if (request._body != null)
+            headers.set('Content-Type', this.getContentType(request._body));
+        request.headers._headers.forEach((value: any, key:any) => headers.set(key, value));
         return headers;
     }
 
     constructor(private worker:any){
         self.addEventListener('sync', (event:any) => {
             event.waitUntil(
-                this.store.requests('readonly').then(requests => requests.getAll()).then((requestes: IdRestRequest[]) => {
-                    return Promise.all(requestes.map((request: IdRestRequest) => {
+                this.store.requests('readonly').then(requests => requests.getAll()).then((requestes: any[]) => {
+                    return Promise.all(requestes.map((request) => {
                         let promiseResolve: any;
                         this.promiseRegister.set(request.id, <Promise<boolean>> new Promise<boolean>(resolve => promiseResolve = resolve));
                         return fetch(request.url, {
-                            method: request.method,
-                            body: JSON.stringify(request.body),
+                            method: this.getMethod(request.method),
+                            body: this.getBody(request._body),
                             cache: "no-store" as RequestCache,
-                            headers: this.getHeaders(request.body)
+                            headers: this.getHeaders(request)
                         }).then(response => {
                             this.store.requests('readwrite').then(requests => requests.delete(request.id));
                             var respToStore = {
@@ -91,7 +108,9 @@ export class HttpSwProxyPluginImpl {
                                 return this.store.closeTransaction();
                             })
                         });
-                    }));
+                    })).catch(err => {
+                        console.error(err);
+                    });
                 })
             );
         });
