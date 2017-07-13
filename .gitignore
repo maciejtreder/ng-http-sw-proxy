@@ -13,3 +13,4 @@ dist
 !tsconfig.json
 .idea
 *.iml
+*.ngfactory.ts

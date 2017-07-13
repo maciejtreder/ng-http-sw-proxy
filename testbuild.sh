@@ -1,3 +1,4 @@
+git push build --delete newBuild
 git commit -m "new build" .
 npm run build
 
