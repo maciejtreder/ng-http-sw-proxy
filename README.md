@@ -39,9 +39,10 @@ export class AppModule {
 }
 ```
 
-in the component/services:
+After importing HttpSwProxyModule @angular http service is shadowed with the new one, from ng-http-sw-proxy.
+component/services looks like previous:
 ```
-import { HttpSwProxy } from 'ng-http-sw-proxy';
+import { Http } from '@angular/http';
 
 @Component({
 /* component setup*/
@@ -50,7 +51,7 @@ export class HttpProxyDemoComponent {
 
     public response: Observable<any>;
 
-    constructor(private http: HttpSwProxy) {}
+    constructor(private http: Http) {}
 
     public sendPost():void {
         this.response = this.http.post("testPost", {exampleKey: "exampleValue"}).map(res => res.json());
@@ -58,7 +59,7 @@ export class HttpProxyDemoComponent {
 }
 ```
 
-and finally initialize service worker in your main file:
+Finally initialize service worker in your main file:
 ```
 platformBrowserDynamic().bootstrapModule(BrowserAppModule).then(() => {
     if (process.env.NODE_ENV == 'production' && 'serviceWorker' in navigator)
