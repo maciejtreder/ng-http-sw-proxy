@@ -11,7 +11,7 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 let connectionStub : any;
 const connectionObs: ReplaySubject<boolean> = new ReplaySubject();
 
-xdescribe('sw-proxy tests', () => {
+describe('sw-proxy tests', () => {
     beforeEach(() => {
         connectionStub = sinon.createStubInstance(ConnectivityService)
         connectionStub.hasNetworkConnection.returns(connectionObs);

@@ -1,6 +1,6 @@
 {
   "name": "ng-http-sw-proxy",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "Proxy for angular http service. Schedules request send in service-worker and/or IndexedDB.",
   "main": "dist/bundles/ng-http-sw-proxy.umd.js",
   "module": "dist/index.js",
@@ -17,7 +17,6 @@
     "node": ">=6.0"
   },
   "scripts": {
-    "test": "karma start",
     "transpile": "ngc",
     "package": "rollup -c",
     "minify": "uglifyjs dist/bundles/ng-http-sw-proxy.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/ng-http-sw-proxy.umd.min.js",
