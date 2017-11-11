@@ -1,6 +1,12 @@
 language: node_js
 node_js:
-- node
+  - node
+before_deploy:
+  - echo "B E F O R E    D E P L O Y"
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+addons:
+  chrome: stable
 deploy:
   provider: npm
   email: contact@maciejtreder.com
@@ -8,4 +14,5 @@ deploy:
     secure: eZVlewYYx+pNlwVMKoYVyUMygJxqt9eeaqRfLM0vJm2m6Y3EEba2gPdHocE2HsJ672eIyBWD0ZpkK2CTTy6YmiXCbn4DqCaFBTzF4YPOJinPvwBV0qhO9hrddLJv9bzqXt57nsG2T2Fayb7lL9ppYIOa7V8NprmTNsXi7R8+o+nJOQlkGxJUClGgs+3x/IjMe+8TQqj40QyHWvhW8wa5okNvCL9ftPMmBvqqALTUzMsHnt4rUXZNqeD4wvHA4KF1xh6iPAihOurR3deGkbgIz4hnfDiLXasfqPJLIGKpXRg0Yz+jtoV6ZnV7qybYXqC3T+m/Zh5XjtvBL0r5RlI8MMiN2ge4Eq/pCg4U2W+0FI3r+gMX/FbIwvn8DbJlTk5pfJD28s5tpRCBK18KOT3hZpqYWrWmj9i12O2k2PDZll2hitXsob7LH7TAR1b8sO1xruFlToXA4F7whkzlqKIAl8lM0WeQn6NSP+jJhP4pLB4uoZMSnfZ80zusPB2OFNfUPHDgTkYhXAPXA8mpHg41xQUcGsSEe6FtzMOKvnUMbXZruIN1nAjr5XAnkkB6u9aq7XfB1S7V0gGgc9F8RJ7eZmI3uILUq9uKD6gkZtKXb1EM4v0KdfRvFoBcKEbarvXLXoHx+GQFIpn4eKvjAAv65wkmbbchl/o7L7GlJO397uc=
   on:
     tags: true
+    branch: master
     repo: maciejtreder/ng-http-sw-proxy
