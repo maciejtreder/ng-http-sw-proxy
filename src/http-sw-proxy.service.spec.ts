@@ -1,11 +1,11 @@
-import { async, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { async, inject, TestBed } from '@angular/core/testing';
 import { HttpSwProxy } from './http-sw-proxy.service';
-import { BaseRequestOptions, Http, Response } from '@angular/http';
+import { BaseRequestOptions, Http } from '@angular/http';
 import { ApplicationRef } from '@angular/core';
 import { Store } from './store';
 import { ConnectivityService } from './connectivity.service';
 import * as sinon from 'sinon';
-import { MockBackend, MockConnection } from '@angular/http/testing';
+import { MockBackend } from '@angular/http/testing';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 let connectionStub : any;
